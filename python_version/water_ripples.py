@@ -1,6 +1,10 @@
 import numpy as np
 import sys
 from time import sleep
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+ax = plt.axes(projection='3d')
 
 def ripple_xy(previous, current, dampening=0.95):
     '''
@@ -57,12 +61,19 @@ def show_ripple(current):
    '''
    sleep(0.10)
    print('\x1b[H')
-   for i in range(current.shape[1]):
-       for j in range(current.shape[0]):
+   for i in range(current.shape[0]):
+       for j in range(current.shape[1]):
            L = int(abs(current[i, j]) / 31)
            luminance = ' .-:=!*#$'
            print(luminance[L], end='')
        print("\n")
+
+def animate(i, values, height, width):
+    plt.cla()
+    x = [j for j in range(height)]
+    y = [j for j in range(width)]
+    ax.plot3D(x, y, values[i], "red")
+
 
 def main():
     
@@ -77,9 +88,21 @@ def main():
 
     # Initializare
     current, previous = init_arrays(width, height, ripple_intensity)
+    values = np.zeros((iterations, height, width))
+    x = [j for j in range(height)]
+    y = [j for j in range(width)]
+    
     for i in range(iterations):
         previous, current = ripple(previous, current, dampening)
-        show_ripple(current)
+        if(i%10 == 0):
+            #ax.scatter3D(x, y, current, c=current, cmap='Greens')
+            ax.contour3D(x, y, current, 50, cmap='binary')
+            plt.draw()
+            sleep(0.5)
+        #show_ripple(current)
+
+    plt.show()
+
     
 
 if __name__ == "__main__":
