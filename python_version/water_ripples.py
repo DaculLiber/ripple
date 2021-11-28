@@ -76,7 +76,7 @@ def main():
     
     # Implementarea asta de a lua command line arguments nu e prea stralucita 
     if len(sys.argv) != 7:
-        sys.exit("\nUsage: water_ripples.py interations width height dampening ripple_intensity show_plot_terminal\n")
+        sys.exit("\nUsage: water_ripples.py iterations width height dampening ripple_intensity show_plot_terminal\n")
     iterations = int(sys.argv[1]) # De cate ori sa faca simularea
     width = int(sys.argv[2]) # Marimiile matricii
     height = int(sys.argv[3])
@@ -117,8 +117,9 @@ def main():
         # Daca e 1 arat varianta de terminal
         if show_plot_terminal:
             show_ripple(current)    
-
-    plt.show()
+    
+    if not show_plot_terminal:
+        plt.show()
 
 if __name__ == "__main__":
     main()
