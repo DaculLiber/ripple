@@ -1,10 +1,9 @@
 import numpy as np
 import sys
 from time import sleep
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+import csv
 
-ax = plt.axes(projection='3d')
+file_path = 'xyz.csv'
 
 def ripple_xy(previous, current, dampening=0.95):
     '''
@@ -68,16 +67,9 @@ def show_ripple(current):
            print(luminance[L], end='')
        print("\n")
 
-def animate(i, values, height, width):
-    plt.cla()
-    x = [j for j in range(height)]
-    y = [j for j in range(width)]
-    ax.plot3D(x, y, values[i], "red")
 
-
-def main():
-    
-    # Implementarea asta de a lua command line arguments nu e prea stralucita si e facuta in fuga
+def read_command_line_arguments():
+# Implementarea asta de a lua command line arguments nu e prea stralucita 
     if len(sys.argv) != 6:
         sys.exit("\nUsage: water_ripples.py interations width height dampening ripple_intensity\n")
     iterations = int(sys.argv[1])
@@ -86,24 +78,31 @@ def main():
     dampening = np.float32(sys.argv[4])
     ripple_intensity = int(sys.argv[5])
 
+
+def main():
+    
+    # Implementarea asta de a lua command line arguments nu e prea stralucita 
+    if len(sys.argv) != 6:
+        sys.exit("\nUsage: water_ripples.py interations width height dampening ripple_intensity show_ripple\n")
+    iterations = int(sys.argv[1])
+    width = int(sys.argv[2])
+    height = int(sys.argv[3])
+    dampening = np.float32(sys.argv[4])
+    ripple_intensity = int(sys.argv[5])
+    show_ripple_bool = int(sys.argv[6])
+
     # Initializare
     current, previous = init_arrays(width, height, ripple_intensity)
     values = np.zeros((iterations, height, width))
-    x = [j for j in range(height)]
-    y = [j for j in range(width)]
     
     for i in range(iterations):
         previous, current = ripple(previous, current, dampening)
-        if(i%10 == 0):
-            #ax.scatter3D(x, y, current, c=current, cmap='Greens')
-            ax.contour3D(x, y, current, 50, cmap='binary')
-            plt.draw()
-            sleep(0.5)
-        #show_ripple(current)
+        with open(file_path, 'w') as f:
+                
+        
 
-    plt.show()
-
-    
+        if show_ripple_bool:
+            show_ripple(current)
 
 if __name__ == "__main__":
     main()
