@@ -25,7 +25,7 @@ python water_ripple.py iterations width height dampening ripple_intensity show_p
 - ripple_intensity: Intensitatea initiala, "cat de tare arunc piatra"
 - show_plot_terminal: 0 pentru plot, 1 pentru terminal (varianta terminal still needs work)
 
-> water_ripples.py 500 200 200 0.97 250 0 Valori pentru care arata OK la mine varianta plot
+> water_ripples.py 500 200 200 0.97 250 0 Valori pentru care arata OK la mine varianta plot <br />
 > water_ripples.py 30 20 20 0.97 250 1 Valori pentru care arata Ok la mine varianta terminal (not stable)
 
 ## Author
