@@ -33,7 +33,7 @@ python water_ripple.py iterations width height dampening ripple_intensity show_p
 👤 **Dragos Ignat**
 
 * Github: [@DaculLiber](https://github.com/DaculLiber)
-* LinkedIn: [@Dragos Ignat](https://linkedin.com/in/Dragos Ignat)
+* LinkedIn: [@Dragos Ignat](https://www.linkedin.com/in/dragos-ignat-342a4a210/)
 
 ## Show your support
 
